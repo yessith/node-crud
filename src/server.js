@@ -1,15 +1,25 @@
 const express = require('express')
+const handlebars = require('express-handlebars')
 const path = require('path')
 const basePath = __dirname
-
-// * Initialization
 const app = express()
 
 // * Setting
-
-// * Port Server
 app.set('port', process.env.PORT || 3000)
 app.set('views', path.join(basePath, 'views'))
+
+// * Template Engine
+const viewsPath = app.get('views')
+
+const configEngine = {
+  defaultLayout: 'main',
+  layoutsDir: path.join(viewsPath, 'layouts'),
+  partialsDir: path.join(viewsPath, 'partials'),
+  extname: '.hbs'
+}
+
+app.engine('.hbs', handlebars.create(configEngine).engine)
+app.set('view engine', '.hbs')
 
 // * Middleware
 // convierte los datos que recibimos a un archivo Json para su tratamiento
@@ -18,11 +28,11 @@ app.use(express.urlencoded({ extended: false }))
 // * Global Variables
 
 // * Routes
-const handleServer = (req, res) => {
-  res.send('<h1>Hola mundo, mi primer server con express que emocion</h1>')
+const mainRoute = (req, res) => {
+  res.render('index')
 }
 
-app.get('/', handleServer)
+app.get('/', mainRoute)
 
 // * Static Files
 // se establece la rutan de donde se van a aencontrar los archivos estaticos
