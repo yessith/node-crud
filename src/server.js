@@ -1,6 +1,9 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
+const morgan = require('morgan')
 const path = require('path')
+const mainRouter = require('./routes/index.routes')
+const taskRouter = require('./routes/tasks.routes')
 const basePath = __dirname
 const app = express()
 
@@ -22,20 +25,18 @@ app.engine('.hbs', handlebars.create(configEngine).engine)
 app.set('view engine', '.hbs')
 
 // * Middleware
-// convierte los datos que recibimos a un archivo Json para su tratamiento
+// guarde los datos que se reciben dentro de un archivo Json para su tratamiento
 app.use(express.urlencoded({ extended: false }))
+app.use(morgan('dev'))
 
 // * Global Variables
 
 // * Routes
-const mainRoute = (req, res) => {
-  res.render('index')
-}
-
-app.get('/', mainRoute)
+app.use(mainRouter)
+app.use(taskRouter)
 
 // * Static Files
 // se establece la rutan de donde se van a aencontrar los archivos estaticos
-app.set(express.static(path.join(basePath, 'public')))
+app.use(express.static(path.join(basePath, 'public')))
 
 module.exports = app

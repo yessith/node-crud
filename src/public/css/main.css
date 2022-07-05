@@ -1,0 +1,210 @@
+:root {
+  --Font-Family: 'Roboto', sans-serif;
+  --Color-White: #ffffff;
+  --Color-Brand: #131921;
+  --Color-Brand-Second: #242f3e;
+  --Color-Text: #333333;
+  --Color-Details: #565959;
+  --Color-Card-Title: #0e7184;
+  --Color-Price: #af2913;
+  --Btn-Primary: #f3d184;
+  --Btn-Secondary: #f0ad64;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/*------------------------------------*\
+    $RESET
+\*------------------------------------*/
+
+html,
+body,
+div,
+span,
+button,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+a,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*------------------------------------*\
+    $SITIO
+\*------------------------------------*/
+
+html {
+  /* font-size: 62.5%; */
+  -webkit-overflow-scrolling: touch;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  font-family: var(--Font-Family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--Color-Text);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  background-color: #1488cc;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/*------------------------------------*\
+    $TIPOGRAFÍA
+\*------------------------------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+span {
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 1.7rem;
+}
+
+/*------------------------------------*\
+    $LINK
+\*------------------------------------*/
+
+a {
+  text-decoration: none;
+  color: var(--Color-White);
+}
+
+a:focus {
+  outline: none;
+}
+
+a:hover,
+a:active {
+  outline: none;
+  color: var(--Btn-Primary);
+}
+
+.mainLayout {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 1rem;
+}

@@ -1,13 +1,13 @@
 const { Schema, model } = require('mongoose')
 
 // * Definicion del schema notes o lo que es igual, definicion de una coleccion de mongodb
-const NoteSchema = new Schema(
+const TaskSchema = new Schema(
   {
     title: {
       type: String,
       require: true
     },
-    content: {
+    description: {
       type: String,
       require: true
     }
@@ -17,4 +17,4 @@ const NoteSchema = new Schema(
   }
 )
 
-module.exports = model('Notes', NoteSchema)
+module.exports = model('Tasks', TaskSchema)
