@@ -1,6 +1,7 @@
 const express = require('express')
-const handlebars = require('express-handlebars')
 const morgan = require('morgan')
+const methodOverride = require('method-override')
+const handlebars = require('express-handlebars')
 const path = require('path')
 const mainRouter = require('./routes/index.routes')
 const taskRouter = require('./routes/tasks.routes')
@@ -28,6 +29,7 @@ app.set('view engine', '.hbs')
 // guarde los datos que se reciben dentro de un archivo Json para su tratamiento
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'))
+app.use(methodOverride('_method'))
 
 // * Global Variables
 

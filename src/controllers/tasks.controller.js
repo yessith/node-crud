@@ -13,7 +13,7 @@ module.exports = {
     const { title, description } = req.body
     const newTask = new Tasks({ title, description })
     await newTask.save()
-    res.send('<h1>add task post </h1>')
+    res.redirect('/tasks')
   },
   editTaskForm: (req, res) => {
     res.render('tasks/editTaskForm')
@@ -21,7 +21,9 @@ module.exports = {
   editTask: (req, res) => {
     res.send('<h1>edit task put</h1>')
   },
-  deleteTask: (req, res) => {
-    res.render('deleteTask')
+  deleteTask: async (req, res) => {
+    const taskId = req.params.id
+    await Tasks.findByIdAndDelete(taskId)
+    res.redirect('/tasks')
   }
 }

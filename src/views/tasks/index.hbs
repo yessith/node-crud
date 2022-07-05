@@ -1,9 +1,5 @@
 <section>
   <h1>List Tasks page</h1>
-  <div>
-    <a href='/tasks/add'>form add new task</a>
-    <a href='/tasks/edit/1'>edit task</a>
-  </div>
 
   {{#if tasks}}
     <div class='row'>
@@ -15,11 +11,13 @@
                 class='card-title d-flex justify-content-between align-items-center'
               >
                 {{title}}
-                <a href='/tasks/edit/{{_id}}'><i class="fa-solid fa-pen-to-square"></i></a>
+                <a href='/tasks/edit/{{_id}}'><i
+                    class='fa-solid fa-pen-to-square'
+                  ></i></a>
               </h4>
               <p>{{description}} </p>
               <!-- DELETE REQUEST -->
-              <form action='/notes/delete/{{_id}}?_method=DELETE' method='POST'>
+              <form action='/tasks/delete/{{_id}}?_method=DELETE' method='POST'>
                 <input type='hidden' name='_method' value='DELETE' />
                 <button
                   type='submit'
@@ -33,7 +31,10 @@
     </div>
 
   {{else}}
-    <p><em>There are currently no task.</em></p>
+    <div>
+      <h2><em>There are currently no task.</em></h2>
+      <a href='/tasks/add'>Add New Task</a>
+    </div>
   {{/if}}
 
 </section>
