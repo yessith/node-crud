@@ -190,7 +190,7 @@ span {
 
 a {
   text-decoration: none;
-  color: var(--Color-White);
+  color: var(--Color-Card-Title);
 }
 
 a:focus {

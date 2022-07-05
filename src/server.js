@@ -28,6 +28,7 @@ app.set('view engine', '.hbs')
 // * Middleware
 // guarde los datos que se reciben dentro de un archivo Json para su tratamiento
 app.use(express.urlencoded({ extended: false }))
+// morgan registrar solicitudes y errores HTTP
 app.use(morgan('dev'))
 app.use(methodOverride('_method'))
 

@@ -1,29 +1,52 @@
 const Tasks = require('../models/Task')
 
 module.exports = {
-  tasks: async (req, res) => {
-    // const tasks = await Tasks.find()
-    const tasks = await Tasks.find().lean()
-    res.render('tasks/index', { tasks })
+  // * Get all tasks
+  tasks: (req, res) => {
+    Tasks.find()
+      .lean()
+      .then(tasks => {
+        res.render('tasks/index', { tasks })
+      })
+      .catch(error => res.send(error))
   },
+
+  // * Create new task
   addTaskForm: (req, res) => {
     res.render('tasks/addTaskForm')
   },
-  createNewTask: async (req, res) => {
+  createNewTask: (req, res) => {
     const { title, description } = req.body
     const newTask = new Tasks({ title, description })
-    await newTask.save()
-    res.redirect('/tasks')
+    newTask
+      .save()
+      .then(() => res.redirect('/tasks'))
+      .catch(error => res.send(error))
   },
+
+  // * Edit single task
   editTaskForm: (req, res) => {
-    res.render('tasks/editTaskForm')
+    const taskId = req.params.id
+    Tasks.findById(taskId)
+      .lean()
+      .then(task => {
+        res.render('tasks/editTaskForm', { task })
+      })
+      .catch(error => res.send(error))
   },
   editTask: (req, res) => {
-    res.send('<h1>edit task put</h1>')
-  },
-  deleteTask: async (req, res) => {
+    const { title, description } = req.body
     const taskId = req.params.id
-    await Tasks.findByIdAndDelete(taskId)
-    res.redirect('/tasks')
+    Tasks.findOneAndUpdate(taskId, { title, description })
+      .then(() => res.redirect('/tasks'))
+      .catch(error => res.send(error))
+  },
+
+  // * Delete single task
+  deleteTask: (req, res) => {
+    const taskId = req.params.id
+    Tasks.findOneAndDelete(taskId)
+      .then(() => res.redirect('/tasks'))
+      .catch(error => res.send(error))
   }
 }

@@ -8,5 +8,5 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(db => console.log('Database Is Connected'))
-  .catch(error => console.error(error))
+  .then(() => console.log('Connected To MongoDB...'))
+  .catch(err => console.log(`Could not connect to MongoDB...${err}`))
