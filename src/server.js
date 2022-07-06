@@ -1,10 +1,14 @@
+'use strict'
 const express = require('express')
-const morgan = require('morgan')
 const methodOverride = require('method-override')
+const session = require('express-session')
+const flash = require('connect-flash')
+const morgan = require('morgan')
 const handlebars = require('express-handlebars')
 const path = require('path')
 const mainRouter = require('./routes/index.routes')
 const taskRouter = require('./routes/tasks.routes')
+
 const basePath = __dirname
 const app = express()
 
@@ -30,9 +34,24 @@ app.set('view engine', '.hbs')
 app.use(express.urlencoded({ extended: false }))
 // morgan registrar solicitudes y errores HTTP
 app.use(morgan('dev'))
+// methodOverride permite usar verbos HTTP como PUT o DELETE en lugares donde el cliente no lo admite.
 app.use(methodOverride('_method'))
+// express-session se usa para configurar y trabajar con sesiones de usuarios y cookies
+app.use(
+  session({
+    secret: 'tasksSecret',
+    resave: true,
+    saveUninitialized: true
+  })
+)
+// permite mostrar mensajes  de información en la pantalla bajo ciertas condiciones.
+app.use(flash())
 
 // * Global Variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg')
+  next()
+})
 
 // * Routes
 app.use(mainRouter)

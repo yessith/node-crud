@@ -29,7 +29,10 @@
   </head>
   <body>
     {{>navMenu}}
-    <main class="mainLayout">{{{body}}}</main>
+    <main class="mainLayout">
+     {{>messages}}
+      {{{body}}}
+    </main>
     {{! FONT AWESOME }}
     <script
       src='https://kit.fontawesome.com/275b6ab054.js'

@@ -20,7 +20,10 @@ module.exports = {
     const newTask = new Tasks({ title, description })
     newTask
       .save()
-      .then(() => res.redirect('/tasks'))
+      .then(() => {
+        req.flash('success_msg', 'Task Added Successfully')
+        res.redirect('/tasks')
+      })
       .catch(error => res.send(error))
   },
 
@@ -37,16 +40,22 @@ module.exports = {
   editTask: (req, res) => {
     const { title, description } = req.body
     const taskId = req.params.id
-    Tasks.findOneAndUpdate(taskId, { title, description })
-      .then(() => res.redirect('/tasks'))
+    Tasks.findByIdAndUpdate(taskId, { title, description })
+      .then(() => {
+        req.flash('success_msg', 'Task Updated Successfully')
+        res.redirect('/tasks')
+      })
       .catch(error => res.send(error))
   },
 
   // * Delete single task
   deleteTask: (req, res) => {
     const taskId = req.params.id
-    Tasks.findOneAndDelete(taskId)
-      .then(() => res.redirect('/tasks'))
+    Tasks.findByIdAndDelete(taskId)
+      .then(() => {
+        req.flash('success_msg', 'Task Deleted Successfully')
+        res.redirect('/tasks')
+      })
       .catch(error => res.send(error))
   }
 }
