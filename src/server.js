@@ -4,13 +4,16 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
 const morgan = require('morgan')
+const passport = require('passport')
 const handlebars = require('express-handlebars')
 const path = require('path')
-const mainRouter = require('./routes/index.routes')
-const taskRouter = require('./routes/tasks.routes')
+const mainRoutes = require('./routes/index.routes')
+const taskRoutes = require('./routes/tasks.routes')
+const authRoutes = require('./routes/auth.routes')
 
 const basePath = __dirname
 const app = express()
+require('./config/passport')
 
 // * Setting
 app.set('port', process.env.PORT || 3000)
@@ -44,18 +47,25 @@ app.use(
     saveUninitialized: true
   })
 )
+// passpor se usa despues de session
+app.use(passport.initialize())
+app.use(passport.session())
 // permite mostrar mensajes  de información en la pantalla bajo ciertas condiciones.
 app.use(flash())
 
 // * Global Variables
 app.use((req, res, next) => {
   res.locals.success_msg = req.flash('success_msg')
+  res.locals.error_msg = req.flash('error_msg')
+  res.locals.error = req.flash('error')
+  res.locals.user = req.user || null
   next()
 })
 
 // * Routes
-app.use(mainRouter)
-app.use(taskRouter)
+app.use(mainRoutes)
+app.use(taskRoutes)
+app.use(authRoutes)
 
 // * Static Files
 // se establece la rutan de donde se van a aencontrar los archivos estaticos

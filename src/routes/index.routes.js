@@ -1,9 +1,9 @@
 const { Router } = require('express')
 const { home, about } = require('../controllers/index.controllers')
-const mainRouter = Router()
+const mainRoutes = Router()
 
-mainRouter.get('/', home)
+mainRoutes.get('/', home)
 
-mainRouter.get('/about', about)
+mainRoutes.get('/about', about)
 
-module.exports = mainRouter
+module.exports = mainRoutes

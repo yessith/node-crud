@@ -9,7 +9,8 @@ const UserSchema = new Schema(
     },
     email: {
       type: String,
-      require: true
+      require: true,
+      unique: true
     },
     password: {
       type: String,
@@ -22,14 +23,16 @@ const UserSchema = new Schema(
 )
 
 // * Encrypt Password with bcrypt
-UserSchema.method.encryptPassword = async password => {
+UserSchema.methods.encryptPassword = async password => {
   const salt = await bcrypt.genSalt(10)
-  return await bcrypt.hash(password, salt)
+  const encryptedPass = await bcrypt.hash(password, salt)
+  return encryptedPass
 }
 
 // * Compare Password Encryption
-UserSchema.method.matchPassword = async function (password) {
-  return await bcrypt.compare(password, this.password)
+UserSchema.methods.matchPassword = async function (password) {
+  const matchPass = await bcrypt.compare(password, this.password)
+  return matchPass
 }
 
 module.exports = model('Users', UserSchema)

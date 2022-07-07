@@ -15,9 +15,11 @@ module.exports = {
   addTaskForm: (req, res) => {
     res.render('tasks/addTaskForm')
   },
+
   createNewTask: (req, res) => {
     const { title, description } = req.body
     const newTask = new Tasks({ title, description })
+
     newTask
       .save()
       .then(() => {
@@ -30,6 +32,7 @@ module.exports = {
   // * Edit single task
   editTaskForm: (req, res) => {
     const taskId = req.params.id
+
     Tasks.findById(taskId)
       .lean()
       .then(task => {
@@ -37,9 +40,11 @@ module.exports = {
       })
       .catch(error => res.send(error))
   },
+
   editTask: (req, res) => {
     const { title, description } = req.body
     const taskId = req.params.id
+
     Tasks.findByIdAndUpdate(taskId, { title, description })
       .then(() => {
         req.flash('success_msg', 'Task Updated Successfully')
@@ -51,6 +56,7 @@ module.exports = {
   // * Delete single task
   deleteTask: (req, res) => {
     const taskId = req.params.id
+
     Tasks.findByIdAndDelete(taskId)
       .then(() => {
         req.flash('success_msg', 'Task Deleted Successfully')

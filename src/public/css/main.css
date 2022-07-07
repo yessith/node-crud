@@ -190,7 +190,7 @@ span {
 
 a {
   text-decoration: none;
-  color: var(--Color-Card-Title);
+  color: var( --Color-Card-Title);
 }
 
 a:focus {
@@ -200,7 +200,7 @@ a:focus {
 a:hover,
 a:active {
   outline: none;
-  color: var(--Btn-Primary);
+  color: inherit;
 }
 
 .mainLayout {

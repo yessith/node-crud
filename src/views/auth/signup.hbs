@@ -1,0 +1,62 @@
+<section class='row'>
+  <div class='col-md-4 mx-auto'>
+    <div class='card bg-dark text-white'>
+      <div class='card-header'>
+        Account Register
+      </div>
+      <div class='card-body'>
+        <form action='/auth/new-signup' method='POST'>
+          <div class='mb-3'>
+            <label for='name'>Name:</label>
+            <input
+              type='text'
+              class='form-control'
+              name='name'
+              placeholder='Name'
+              value='{{name}}'
+              required='true'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='email'>Email:</label>
+            <input
+              type='email'
+              class='form-control'
+              name='email'
+              placeholder='Email'
+              value='{{email}}'
+              required='true'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='password'>Password</label>
+            <input
+              type='password'
+              class='form-control'
+              name='password'
+              placeholder='Password'
+              value='{{password}}'
+              required='true'
+            />
+          </div>
+          <div class='mb-3'>
+            <label for='matchPassword'>Cofirm Password:</label>
+            <input
+              type='password'
+              class='form-control'
+              name='matchPassword'
+              placeholder='Confirm Password'
+              value='{{matchPassword}}'
+              required='true'
+            />
+          </div>
+          <button class='btn btn-primary btn-block'>
+            Signup
+          </button>
+        </form>
+      </div>
+      <p class='text-center'>Already Have an Account?
+        <a href='/auth/signin' class='text-info'>Login</a></p>
+    </div>
+  </div>
+</section>
