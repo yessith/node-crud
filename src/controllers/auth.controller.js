@@ -8,7 +8,7 @@ module.exports = {
     res.render('auth/signin')
   },
 
-  signin: passport.authenticate('login', {
+  signin: passport.authenticate('local', {
     failureRedirect: '/auth/signin',
     successRedirect: '/tasks',
     failureFlash: true

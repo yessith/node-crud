@@ -10,6 +10,10 @@ const TaskSchema = new Schema(
     description: {
       type: String,
       require: true
+    },
+    user: {
+      type: String,
+      require: true
     }
   },
   {

@@ -3,7 +3,9 @@ const Tasks = require('../models/Task')
 module.exports = {
   // * Get all tasks
   tasks: (req, res) => {
-    Tasks.find()
+    const user = req.user.id
+    Tasks.find({ user })
+      .sort({ createdAt: 'desc' })
       .lean()
       .then(tasks => {
         res.render('tasks/index', { tasks })
@@ -18,8 +20,8 @@ module.exports = {
 
   createNewTask: (req, res) => {
     const { title, description } = req.body
-    const newTask = new Tasks({ title, description })
-
+    const user = req.user.id
+    const newTask = new Tasks({ title, description, user })
     newTask
       .save()
       .then(() => {
@@ -32,10 +34,13 @@ module.exports = {
   // * Edit single task
   editTaskForm: (req, res) => {
     const taskId = req.params.id
-
+    const user = req.user.id
     Tasks.findById(taskId)
       .lean()
       .then(task => {
+        if (task.user !== user) {
+          return res.redirect('/tasks')
+        }
         res.render('tasks/editTaskForm', { task })
       })
       .catch(error => res.send(error))
@@ -56,9 +61,13 @@ module.exports = {
   // * Delete single task
   deleteTask: (req, res) => {
     const taskId = req.params.id
+    const user = req.user.id
 
     Tasks.findByIdAndDelete(taskId)
-      .then(() => {
+      .then(task => {
+        if (task.user !== user) {
+          return res.redirect('/tasks')
+        }
         req.flash('success_msg', 'Task Deleted Successfully')
         res.redirect('/tasks')
       })

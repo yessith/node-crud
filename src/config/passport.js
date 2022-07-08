@@ -3,7 +3,6 @@ const LocalStrategy = require('passport-local').Strategy
 const Users = require('../models/User')
 
 passport.use(
-  'login',
   new LocalStrategy(
     {
       // get input value
@@ -21,7 +20,7 @@ passport.use(
           }
 
           return user
-            .matchPassword(password)
+            .validPassword(password)
             .then(matchPass =>
               matchPass
                 ? done(null, user)
